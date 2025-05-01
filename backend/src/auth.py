@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
 
 
-auth = Blueprint("auth", __name__, url_prefix="/auth")
+auth = Blueprint("auth", __name__, url_prefix="/api/v1.0/auth")
 
 # user registration route
 @auth.post("/register")

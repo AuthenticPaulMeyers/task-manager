@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy import desc
 from datetime import datetime
 
-tasks = Blueprint("tasks", __name__, url_prefix="/tasks")
+tasks = Blueprint("tasks", __name__, url_prefix="/api/v1.0/tasks")
 
 
 @tasks.post("/add")
