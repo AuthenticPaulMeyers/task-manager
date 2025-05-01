@@ -1,0 +1,17 @@
+<!-- login form -->
+<form id="login-form" action="post">
+    <input type="email" id="login-email" required placeholder="Email" />
+    <input type="password" id="login-password" required placeholder="Password" />
+    <button type="submit">Log In</button>
+  </form>
+  
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      login(email, password);
+    });
+  </script>
+  

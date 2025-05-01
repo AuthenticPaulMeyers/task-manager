@@ -1,0 +1,55 @@
+<!-- dashboard -->
+<div id="task-list"></div>
+
+<!-- create task form -->
+<form id="create-task-form">
+  <input type="text" id="task-title" required placeholder="Task Title" />
+  <textarea id="task-desc" placeholder="Task Description (optional)"></textarea>
+  <input type="datetime-local" id="task-reminder" required />
+  <button type="submit">Add Task</button>
+</form>
+
+<script src="js/auth.js"></script>
+<script src="js/tasks.js"></script>
+<script>
+  // Load tasks when page loads
+  window.onload = function () {
+    fetchTasks();
+  };
+
+  // Create task form handler
+  document.getElementById('create-task-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const title = document.getElementById('task-title').value;
+    const description = document.getElementById('task-desc').value;
+    const reminderTime = document.getElementById('task-reminder').value;
+
+    createTask(title, description, reminderTime);
+  });
+
+//   notifications script
+window.onload = function () {
+    requestNotificationPermission();
+    fetchTasks();
+  };
+
+  // Modify renderTasks to schedule notifications
+  function renderTasks(tasks) {
+    const taskList = document.getElementById('task-list');
+    taskList.innerHTML = '';
+
+    tasks.forEach(task => {
+      const taskItem = document.createElement('div');
+      taskItem.className = 'p-4 mb-2 bg-white shadow rounded';
+      taskItem.innerHTML = `
+        <h2 class="text-lg font-bold">${task.title}</h2>
+        <p class="text-gray-600">${task.description || ''}</p>
+        <p class="text-sm text-gray-400">Reminder: ${new Date(task.reminder_time).toLocaleString()}</p>
+      `;
+      taskList.appendChild(taskItem);
+
+      // Schedule the task reminder
+      scheduleTaskNotification(task);
+    });
+  }
+</script>
